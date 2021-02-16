@@ -1,0 +1,58 @@
+plugins {
+    id 'java-library'
+    id 'eclipse'
+    // This will create a warning "No valid plugin descriptors were found in META-INF/gradle-plugins"
+    // https://github.com/gradle/gradle/issues/9758#issuecomment-597780209
+    id 'java-gradle-plugin'
+    id 'maven-publish'
+    id 'com.gradle.plugin-publish' version '0.11.0'
+    id 'application'
+}
+
+ext {
+    // dependencies version
+    ioxIliVersion = '1.20.15'
+    ioxWkfVersion = '1.2.23' // Temporary. Until shp-trim branch is merged into master / original repo.
+    av2geobauVersion = '1.0.2-SNAPSHOT'
+    sqliteJdbcVersion = '3.8.11.2'
+
+    // dependencies
+    ioxIliDependency = [ group: 'ch.interlis', name: 'iox-ili', version: ioxIliVersion ]
+    ioxWkfDependency = [ group: 'ch.interlis', name: 'iox-wkf', version: ioxWkfVersion ]
+    av2geobauDependency = [ group: 'ch.interlis', name: 'av2geobau', version: av2geobauVersion ]
+    sqliteJdbcDependency = [ group: 'org.xerial', name: 'sqlite-jdbc', version: sqliteJdbcVersion ]
+}
+
+configurations.all {
+    resolutionStrategy {
+        force 'ch.interlis:iox-ili:1.20.15'
+        force 'ch.interlis:iox-wkf:1.2.23'
+    }
+}
+
+repositories {
+    mavenLocal()
+    maven { url "https://dl.bintray.com/sogis/iox-wkf/" } // TODO: REMOVE!!
+    maven { url "http://jars.interlis.ch" }
+    maven { url "https://repo.osgeo.org/repository/release/" }
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    api gradleApi()
+    api ioxWkfDependency
+    api ioxIliDependency
+    api av2geobauDependency
+    api sqliteJdbcDependency
+}
+
+application {
+    // Define the main class for the application.
+    mainClassName = 'ch.so.agi.Gpkg2Dxf'
+}
+
+// all source files are encoded as UTF-8
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
