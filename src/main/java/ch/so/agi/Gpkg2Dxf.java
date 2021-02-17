@@ -346,6 +346,11 @@ public class Gpkg2Dxf {
 
         Gpkg2Dxf gpkg2Dxf =  new Gpkg2Dxf();
 
+        if (gpkgFile == null || outputDir == null) {
+            log.severe("gpkgFile and outputDir must be specified!");
+            return;
+        }
+
         try {
 
             gpkg2Dxf.execute(gpkgFile, outputDir);
