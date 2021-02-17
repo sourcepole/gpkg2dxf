@@ -29,3 +29,4 @@ build/
 bin/
 .settings
 .classpath
+dist/
