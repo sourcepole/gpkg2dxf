@@ -17,19 +17,10 @@ ext {
     sqliteJdbcDependency = [ group: 'org.xerial', name: 'sqlite-jdbc', version: sqliteJdbcVersion ]
 }
 
-configurations.all {
-    resolutionStrategy {
-        force 'ch.interlis:iox-ili:1.20.15'
-        force 'ch.interlis:iox-wkf:1.2.23'
-    }
-}
-
 repositories {
-    mavenLocal()
     maven { url "https://dl.bintray.com/sogis/iox-wkf/" } // TODO: REMOVE!!
     maven { url "http://jars.interlis.ch" }
     maven { url "https://repo.osgeo.org/repository/release/" }
-    mavenCentral()
     jcenter()
 }
 
