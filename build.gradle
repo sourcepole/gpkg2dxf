@@ -40,3 +40,33 @@ application {
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
+
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'ch.so.agi.Gpkg2Dxf',
+                "Class-Path": configurations.runtimeClasspath.collect { 'libs/'+it.getName() }.join(' ')
+        )
+    }
+}
+
+task bindist(type: Zip){
+	baseName = project.name
+	destinationDir = file('dist')
+	from jar
+	into('libs'){
+		from configurations.runtimeClasspath
+	}
+}
+
+artifacts {
+	archives(bindist.archivePath) {
+        type 'zip'
+        classifier 'bindist'
+        builtBy bindist
+    }
+    archives(jar.archivePath) {
+        builtBy jar
+    }
+}
