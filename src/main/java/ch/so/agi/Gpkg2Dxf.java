@@ -43,8 +43,6 @@ import java.util.logging.SimpleFormatter;
 public class Gpkg2Dxf {
 
     private static final Logger log = Logger.getLogger(Gpkg2Dxf.class.getCanonicalName());
-    private String taskName;
-
     private static final String COORD="COORD";
     private static final String MULTICOORD="MULTICOORD";
     private static final String POLYLINE="POLYLINE";
@@ -52,16 +50,6 @@ public class Gpkg2Dxf {
     private static final String MULTISURFACE="MULTISURFACE";
 
     public Gpkg2Dxf() {
-        this(null);
-    }
-
-    public Gpkg2Dxf(String taskName) {
-        if (taskName == null) {
-            taskName = Gpkg2Dxf.class.getSimpleName();
-        } else {
-            this.taskName = taskName;
-        }
-
         // This is used to make the log output prettier
         setLoggerHandler();
     }
@@ -85,8 +73,7 @@ public class Gpkg2Dxf {
     }
 
     public void execute(String gpkgFile, String outputDir) throws Exception {
-        log.info(String.format("Start Gpkg2Dxf(Name: %s GpkgFileName: %s OutputDir: %s)", taskName, gpkgFile,
-                outputDir));
+        log.info(String.format("Start Gpkg2Dxf(GpkgFileName: %s OutputDir: %s)", gpkgFile, outputDir));
 
         // Get all geopackage tables that will be converted to dxf files.
         String sql = "SELECT \n" +

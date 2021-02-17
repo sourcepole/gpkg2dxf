@@ -1,11 +1,5 @@
 plugins {
-    id 'java-library'
-    id 'eclipse'
-    // This will create a warning "No valid plugin descriptors were found in META-INF/gradle-plugins"
-    // https://github.com/gradle/gradle/issues/9758#issuecomment-597780209
-    id 'java-gradle-plugin'
     id 'maven-publish'
-    id 'com.gradle.plugin-publish' version '0.11.0'
     id 'application'
 }
 
@@ -40,11 +34,10 @@ repositories {
 }
 
 dependencies {
-    api gradleApi()
-    api ioxWkfDependency
-    api ioxIliDependency
-    api av2geobauDependency
-    api sqliteJdbcDependency
+    implementation ioxWkfDependency
+    implementation ioxIliDependency
+    implementation av2geobauDependency
+    implementation sqliteJdbcDependency
 }
 
 application {
