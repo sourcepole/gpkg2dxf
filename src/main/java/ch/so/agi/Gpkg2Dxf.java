@@ -44,11 +44,11 @@ import java.util.logging.SimpleFormatter;
 public class Gpkg2Dxf {
 
     private static final Logger log = Logger.getLogger(Gpkg2Dxf.class.getCanonicalName());
-    private static final String COORD="COORD";
-    private static final String MULTICOORD="MULTICOORD";
-    private static final String POLYLINE="POLYLINE";
-    private static final String MULTIPOLYLINE="MULTIPOLYLINE";
-    private static final String MULTISURFACE="MULTISURFACE";
+    private static final String COORD = "COORD";
+    private static final String MULTICOORD = "MULTICOORD";
+    private static final String POLYLINE = "POLYLINE";
+    private static final String MULTIPOLYLINE = "MULTIPOLYLINE";
+    private static final String MULTISURFACE = "MULTISURFACE";
 
     public Gpkg2Dxf(String logPath) {
         // This is used to make the log output prettier
