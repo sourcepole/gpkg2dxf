@@ -6,10 +6,11 @@ This is a standalone application of [gretl's](https://github.com/sogis/gretl) [G
 
 Gpkg2Dxf expects two arguments:
 
-| Arguments        | Deskription                     where the |
+| Arguments        | Description                     |
 | -------------    |-------------                    |
 | gpkgFile         | Input GPKG-File                 |
 | outputDir        | Output directory, of the result |
+| log (Optional)   | Log file path                   |
 
 and it can be started with
 

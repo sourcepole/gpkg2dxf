@@ -36,6 +36,7 @@ import ch.interlis.iox_j.jts.Jts2iox;
 import ch.interlis.ioxwkf.gpkg.GeoPackageReader;
 
 import java.util.logging.ConsoleHandler;
+import java.util.logging.FileHandler;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
@@ -49,15 +50,15 @@ public class Gpkg2Dxf {
     private static final String MULTIPOLYLINE="MULTIPOLYLINE";
     private static final String MULTISURFACE="MULTISURFACE";
 
-    public Gpkg2Dxf() {
+    public Gpkg2Dxf(String logPath) {
         // This is used to make the log output prettier
-        setLoggerHandler();
+        setLoggerHandler(logPath);
     }
 
-    private void setLoggerHandler() {
+    private void setLoggerHandler(String logPath) {
         log.setUseParentHandlers(false);
-        ConsoleHandler handler = new ConsoleHandler();
-        handler.setFormatter(new SimpleFormatter() {
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        SimpleFormatter simpleFormatter = new SimpleFormatter() {
             private static final String format = "[%1$tF %1$tT] [%2$-7s] %3$s %n";
 
             @Override
@@ -68,8 +69,21 @@ public class Gpkg2Dxf {
                         lr.getMessage()
                 );
             }
-        });
-        log.addHandler(handler);
+        };
+
+        consoleHandler.setFormatter(simpleFormatter);
+        log.addHandler(consoleHandler);
+
+        if (logPath != null) {
+            FileHandler fileHandler;
+            try {
+                fileHandler = new FileHandler(logPath);
+                fileHandler.setFormatter(simpleFormatter);
+                log.addHandler(fileHandler);
+            } catch (SecurityException | IOException e) {
+                log.severe(e.toString());
+            }
+        }
     }
 
     public void execute(String gpkgFile, String outputDir) throws Exception {
@@ -323,6 +337,7 @@ public class Gpkg2Dxf {
 
 		String gpkgFile = null;
 		String outputDir = null;
+		String logPath = null;
 
 		if (args.length==0) {
 			return;
@@ -341,10 +356,15 @@ public class Gpkg2Dxf {
                 i++;
                 outputDir = args[i];
 
+			} else if (arg.equals("--log")) {
+
+                i++;
+                logPath = args[i];
+
 			}
         }
 
-        Gpkg2Dxf gpkg2Dxf =  new Gpkg2Dxf();
+        Gpkg2Dxf gpkg2Dxf =  new Gpkg2Dxf(logPath);
 
         if (gpkgFile == null || outputDir == null) {
             log.severe("gpkgFile and outputDir must be specified!");
