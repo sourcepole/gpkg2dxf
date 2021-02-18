@@ -374,6 +374,7 @@ public class Gpkg2Dxf {
         try {
 
             gpkg2Dxf.execute(gpkgFile, outputDir);
+            log.info("... generation done");
         } catch (Exception exception) {
             StringBuilder stackTrace = new StringBuilder();
             stackTrace.append(exception.toString());
@@ -383,6 +384,7 @@ public class Gpkg2Dxf {
                 stackTrace.append("\n\tat " + traceElement);
 
             log.severe(stackTrace.toString());
+            log.severe("... generation failed");
         }
     }
 }
