@@ -18,12 +18,12 @@ jobs:
         run: gradle build
 
       - name: Create release
-        uses: ncipollo/release-action@v1
+        uses: meeDamian/github-release@2.0
         with:
           name: latest-ci-build
           tag: latest-ci-build
-          artifacts: "./dist/gpkg2dxf.zip"
-          allowUpdates: true
-          replacesArtifacts: true
-          artifactContentType: "application/zip"
+          files: >
+            ./dist/gpkg2dxf.zip
+          allow_override: true
+          gzip: false
           token: ${{ secrets.GITHUB_TOKEN }}
