@@ -19,7 +19,7 @@ ext {
 
 repositories {
     maven { url "https://dl.bintray.com/sogis/iox-wkf/" } // TODO: REMOVE!!
-    maven { url "http://jars.interlis.ch" }
+    maven { url "https://jars.interlis.ch" }
     maven { url "https://repo.osgeo.org/repository/release/" }
     jcenter()
 }
