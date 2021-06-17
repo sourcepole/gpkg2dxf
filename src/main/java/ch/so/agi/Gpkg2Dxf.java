@@ -145,7 +145,7 @@ public class Gpkg2Dxf {
             String dxfLayerAttr = dxfLayerInfo.getDxfLayerAttr();
 
             String dxfFileName = Paths.get(outputDir, tableName + ".dxf").toFile().getAbsolutePath();
-            java.io.Writer fw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(dxfFileName), "ISO-8859-1"));
+            java.io.Writer fw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(dxfFileName, false), "ISO-8859-1"));
             log.info("dxfFile: " + dxfFileName);
 
             try {
