@@ -6,7 +6,7 @@ plugins {
 ext {
     // dependencies version
     ioxIliVersion = '1.20.15'
-    ioxWkfVersion = '1.2.23' // Temporary. Until shp-trim branch is merged into master / original repo.
+    ioxWkfVersion = '1.0.2'
     av2geobauVersion = '1.0.2-SNAPSHOT'
     sqliteJdbcVersion = '3.8.11.2'
 
@@ -18,7 +18,6 @@ ext {
 }
 
 repositories {
-    maven { url "https://dl.bintray.com/sogis/iox-wkf/" } // TODO: REMOVE!!
     maven { url "https://jars.interlis.ch" }
     maven { url "https://repo.osgeo.org/repository/release/" }
     jcenter()
